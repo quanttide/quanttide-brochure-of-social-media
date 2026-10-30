@@ -1,4 +1,4 @@
-# 量潮媒体云命令行工具 qtcloud-media-cli 发布 v0.1.0
+# 量潮媒体云命令行工具发布 v0.1.0
 
 一条命令，把 Markdown 文章排好版，直接送进微信公众号草稿箱。
 
@@ -8,7 +8,7 @@
 
 qtcloud-media-cli 就是这个基础设施的第一块：排版引擎加发布通道，一条命令走完。
 
-## 功能
+## API
 
 两个命令，对应两种用法：
 
@@ -17,27 +17,31 @@ qtcloud-media-cli 就是这个基础设施的第一块：排版引擎加发布�
 | `qtcloud-media render` | Markdown → 公众号草稿 HTML。只排版，不联网 |
 | `qtcloud-media publish` | 排版 → 上传正文图片 → 封面入库 → 推进公众号草稿箱 |
 
-`publish` 不是群发。文章停在草稿箱，到公众号后台确认后再手动群发——发布动作始终留在人手里。
+文章停在草稿箱，到公众号后台确认后再手动群发——发布动作始终留在人手里。
 
-## 使用方法
+## 使用
 
 从 crates.io 安装：
 
 ```bash
 cargo install qtcloud-media-cli
+```
 
-# 只排版
+只排版：
+
+```bash
 qtcloud-media render article.md --theme themes/default.toml -o article.html
+```
 
-# 排版并推进公众号草稿箱
+排版并推进公众号草稿箱：
+
+```bash
 export QTCLOUD_MEDIA_APP_ID=wx...
 export QTCLOUD_MEDIA_APP_SECRET=...
 qtcloud-media publish article.md --title "文章标题" --thumb ./cover.png
 ```
 
 两个前置条件：公众号账号需要有 API 权限；服务器出口 IP 要加进公众平台后台的 IP 白名单。
-
-源码托管在 GitHub：https://github.com/quanttide/qtcloud-media
 
 ## 排版
 
@@ -52,5 +56,3 @@ v0.1.0 在真实公众号上完整跑通：一篇三千字的真实文章从 Mar
 ## 下一步
 
 接下来的重点是草稿质量。今后稿件大多由 AI 写、AI 发，中间难免出现混乱——引用失效、表述跑偏、该核对的细节没核对。发布前的最后一道关仍然在人，工具要做的是把这道关变得省力：草稿进箱之前，先给出一份可核对的评审结果。
-
-欢迎通过 GitHub issue 提交反馈：https://github.com/quanttide/qtcloud-media/issues
